@@ -26,9 +26,18 @@
 import AppLogo from '~/components/AppLogo.vue'
 
 export default {
+  data () {
+    return {
+      isLoaded: false
+    }
+  },
   components: {
     AppLogo
-  }
+  },
+async mounted() {
+  await this.$store.dispatch('INIT_CHATS');
+  this.isLoaded = true;
+}
 }
 </script>
 
