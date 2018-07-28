@@ -12,6 +12,12 @@ const createStore = () => {
     state: {
       chats: []
     },
+    getters: {
+      chats: state => {
+        console.info("chats", state.chats);
+        return state.chats;
+      }
+    },
     mutations: {
       ...firebaseMutations
     },

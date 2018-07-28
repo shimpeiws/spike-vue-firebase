@@ -1,29 +1,17 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        spike-vue-firebase
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
+  <div class="container">
+    <div class="columns" v-if="isLoaded">
+      <ChatList />
     </div>
-  </section>
+    <div class="loading" v-else>
+      <p>Loading</p>
+    </div>
+  </div>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import ChatList from '~/components/ChatList.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -32,12 +20,15 @@ export default {
     }
   },
   components: {
-    AppLogo
+    ChatList
   },
-async mounted() {
-  await this.$store.dispatch('INIT_CHATS');
-  this.isLoaded = true;
-}
+  async mounted() {
+    await this.$store.dispatch('INIT_CHATS');
+    this.isLoaded = true;
+  },
+  computed: {
+    ...mapGetters(['chats'])
+  }
 }
 </script>
 
@@ -48,27 +39,6 @@ async mounted() {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
 
