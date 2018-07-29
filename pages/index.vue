@@ -2,6 +2,8 @@
   <div class="container">
     <div class="columns" v-if="isLoaded">
       <ChatList />
+      <p>{{filterParams}}</p>
+      <FilterInput />
     </div>
     <div class="loading" v-else>
       <p>Loading</p>
@@ -11,6 +13,7 @@
 
 <script>
 import ChatList from '~/components/ChatList.vue'
+import FilterInput from '~/components/FilterInput.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -20,14 +23,15 @@ export default {
     }
   },
   components: {
-    ChatList
+    ChatList,
+    FilterInput
   },
   async mounted() {
     await this.$store.dispatch('INIT_CHATS');
     this.isLoaded = true;
   },
   computed: {
-    ...mapGetters(['chats'])
+    ...mapGetters(['chats', 'filterParams'])
   }
 }
 </script>

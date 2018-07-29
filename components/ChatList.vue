@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="list">
     <ul class="chats">
+        <p>
+            Chat Count = {{chats.length}}
+        </p>
         <Chat class="chat" :chat="chat" :key="chat['.key']" v-for="chat in chats" />
     </ul>
   </div>
