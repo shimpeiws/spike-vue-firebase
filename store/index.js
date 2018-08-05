@@ -37,7 +37,9 @@ const createStore = () => {
           unbindFirebaseRef("chats");
           bindFirebaseRef(
             "chats",
-            chatsRef.orderByChild(filterParams).equalTo(true)
+            chatsRef
+              .orderByChild(`subscribers/user_id-${filterParams}`)
+              .equalTo(true)
           );
           commit("setFilterParams", { filterParams });
         }
