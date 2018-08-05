@@ -43,7 +43,16 @@ const createStore = () => {
           );
           commit("setFilterParams", { filterParams });
         }
-      )
+      ),
+      ADD_CHATROOMS: firebaseAction(() => {
+        const date = new Date();
+        for (let i = 0; i < 100; i++) {
+          chatsRef.push({
+            name: `chat name ${i}`,
+            subscribers: { [`user_id-${i}`]: true }
+          });
+        }
+      })
     }
   });
 };

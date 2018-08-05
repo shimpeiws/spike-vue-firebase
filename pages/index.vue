@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="columns" v-if="isLoaded">
+      <button v-on:click="addChatRooms">Add 100 chat rooms</button>
       <ChatList />
       <p>{{filterParams}}</p>
       <FilterInput />
@@ -29,6 +30,12 @@ export default {
   async mounted() {
     await this.$store.dispatch('INIT_CHATS');
     this.isLoaded = true;
+  },
+  methods: {
+    addChatRooms () {
+      console.info('addChatRooms')
+      this.$store.dispatch('ADD_CHATROOMS');
+    }
   },
   computed: {
     ...mapGetters(['chats', 'filterParams'])
