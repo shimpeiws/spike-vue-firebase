@@ -5,6 +5,7 @@
         <p>
           key = {{chat[".key"]}}
           name = <strong>{{chat.name}}</strong>
+          subscribers = {{chat.subscribers}}
         </p>
       </div>
     </div>
